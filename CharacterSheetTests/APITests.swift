@@ -1,14 +1,13 @@
 //
-//  CharacterSheetTests.swift
+//  APITests.swift
 //  CharacterSheetTests
 //
 //  Created by Cicero Nascimento on 07/12/23.
 //
 
 import XCTest
-@testable import CharacterSheet
 
-final class CharacterSheetTests: XCTestCase {
+final class APITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
