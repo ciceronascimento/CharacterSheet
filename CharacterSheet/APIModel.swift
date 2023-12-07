@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+struct APIModel: Codable {
+    let count: Int?
+    let results: [Result]?
+}
+
+struct Result: Codable {
+    let index: String?
+    let name: String
+    let url: String
+}
