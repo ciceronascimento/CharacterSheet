@@ -11,9 +11,9 @@
 		DD60548D2B237AB800F9F7B0 /* CatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD60548C2B237AB800F9F7B0 /* CatsViewController.swift */; };
 		DD60548F2B237AC500F9F7B0 /* DogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD60548E2B237AC500F9F7B0 /* DogsViewController.swift */; };
 		DD6054912B23851F00F9F7B0 /* DogAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6054902B23851F00F9F7B0 /* DogAPIModel.swift */; };
+		DD6054942B23A69F00F9F7B0 /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6054932B23A69F00F9F7B0 /* APIConfiguration.swift */; };
 		DDDB1DE72B224EDE00A96193 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDB1DE62B224EDE00A96193 /* AppDelegate.swift */; };
 		DDDB1DE92B224EDE00A96193 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDB1DE82B224EDE00A96193 /* SceneDelegate.swift */; };
-		DDDB1DEB2B224EDE00A96193 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDB1DEA2B224EDE00A96193 /* ViewController.swift */; };
 		DDDB1DF12B224EDE00A96193 /* CharacterSheet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDDB1DEF2B224EDE00A96193 /* CharacterSheet.xcdatamodeld */; };
 		DDDB1DF32B224EE000A96193 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDDB1DF22B224EE000A96193 /* Assets.xcassets */; };
 		DDDB1DF62B224EE000A96193 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDDB1DF42B224EE000A96193 /* LaunchScreen.storyboard */; };
@@ -47,10 +47,10 @@
 		DD60548C2B237AB800F9F7B0 /* CatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsViewController.swift; sourceTree = "<group>"; };
 		DD60548E2B237AC500F9F7B0 /* DogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogsViewController.swift; sourceTree = "<group>"; };
 		DD6054902B23851F00F9F7B0 /* DogAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogAPIModel.swift; sourceTree = "<group>"; };
+		DD6054932B23A69F00F9F7B0 /* APIConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfiguration.swift; sourceTree = "<group>"; };
 		DDDB1DE32B224EDE00A96193 /* CharacterSheet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CharacterSheet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDDB1DE62B224EDE00A96193 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDDB1DE82B224EDE00A96193 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DDDB1DEA2B224EDE00A96193 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DDDB1DF02B224EDE00A96193 /* CharacterSheet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CharacterSheet.xcdatamodel; sourceTree = "<group>"; };
 		DDDB1DF22B224EE000A96193 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DDDB1DF52B224EE000A96193 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -91,6 +91,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD6054922B23A61000F9F7B0 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				DD6054932B23A69F00F9F7B0 /* APIConfiguration.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		DD6054952B23B5AE00F9F7B0 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				DD6054962B23B5B400F9F7B0 /* Scenes */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		DD6054962B23B5B400F9F7B0 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				DD6054992B23B60500F9F7B0 /* DogsCatalog */,
+				DD6054982B23B5FA00F9F7B0 /* CatsCatalog */,
+				DD6054972B23B5C200F9F7B0 /* TabBar */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		DD6054972B23B5C200F9F7B0 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				DD60548A2B23757700F9F7B0 /* TabController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		DD6054982B23B5FA00F9F7B0 /* CatsCatalog */ = {
+			isa = PBXGroup;
+			children = (
+				DD60548C2B237AB800F9F7B0 /* CatsViewController.swift */,
+			);
+			path = CatsCatalog;
+			sourceTree = "<group>";
+		};
+		DD6054992B23B60500F9F7B0 /* DogsCatalog */ = {
+			isa = PBXGroup;
+			children = (
+				DD60548E2B237AC500F9F7B0 /* DogsViewController.swift */,
+			);
+			path = DogsCatalog;
+			sourceTree = "<group>";
+		};
 		DDDB1DDA2B224EDE00A96193 = {
 			isa = PBXGroup;
 			children = (
@@ -115,12 +165,10 @@
 		DDDB1DE52B224EDE00A96193 /* CharacterSheet */ = {
 			isa = PBXGroup;
 			children = (
+				DD6054952B23B5AE00F9F7B0 /* UI */,
+				DD6054922B23A61000F9F7B0 /* Domain */,
 				DDDB1DE62B224EDE00A96193 /* AppDelegate.swift */,
 				DDDB1DE82B224EDE00A96193 /* SceneDelegate.swift */,
-				DDDB1DEA2B224EDE00A96193 /* ViewController.swift */,
-				DD60548A2B23757700F9F7B0 /* TabController.swift */,
-				DD60548C2B237AB800F9F7B0 /* CatsViewController.swift */,
-				DD60548E2B237AC500F9F7B0 /* DogsViewController.swift */,
 				DDDB1E1C2B225D1A00A96193 /* CatAPIModel.swift */,
 				DD6054902B23851F00F9F7B0 /* DogAPIModel.swift */,
 				DDDB1E1A2B2258B700A96193 /* APIManager.swift */,
@@ -282,11 +330,11 @@
 			files = (
 				DD60548B2B23757700F9F7B0 /* TabController.swift in Sources */,
 				DD6054912B23851F00F9F7B0 /* DogAPIModel.swift in Sources */,
-				DDDB1DEB2B224EDE00A96193 /* ViewController.swift in Sources */,
 				DDDB1DF12B224EDE00A96193 /* CharacterSheet.xcdatamodeld in Sources */,
 				DDDB1E1B2B2258B700A96193 /* APIManager.swift in Sources */,
 				DDDB1DE72B224EDE00A96193 /* AppDelegate.swift in Sources */,
 				DD60548D2B237AB800F9F7B0 /* CatsViewController.swift in Sources */,
+				DD6054942B23A69F00F9F7B0 /* APIConfiguration.swift in Sources */,
 				DDDB1E1D2B225D1A00A96193 /* CatAPIModel.swift in Sources */,
 				DD60548F2B237AC500F9F7B0 /* DogsViewController.swift in Sources */,
 				DDDB1DE92B224EDE00A96193 /* SceneDelegate.swift in Sources */,

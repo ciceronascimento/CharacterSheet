@@ -15,8 +15,6 @@ class CatsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         testAPI()
-
-
     }
 
     func testAPI() {
