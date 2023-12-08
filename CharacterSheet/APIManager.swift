@@ -15,29 +15,13 @@ extension URLSession: NetworkSession {
     func fetchData(for request: URLRequest) async throws -> (Data, URLResponse) {
         return try await self.data(for: request)
     }
-
-    private func originalData(for request: URLRequest) async throws -> (Data, URLResponse) {
-        return try await self.data(for: request)
-    }
 }
 
 struct APIFactory {
-    static func makeAPIRequest(route: APIRoute) -> URLRequest {
-
-        let baseURL = "https://api.thedogapi.com/v1/"
-        let url = URL(string: baseURL + route.rawValue)!
+    static func makeAPIRequest(apiConfig: APIConfiguration) -> URLRequest {
+        let url = URL(string: apiConfig.baseURL + apiConfig.path)!
         var request = URLRequest(url: url)
-
-// MARK: - For cat api
-//        let baseURL = "https://api.thecatapi.com/v1/"
-//        request.allHTTPHeaderFields = [
-//            "x-api-key": "live_dLyS6QQabRYjUFDnc5L7gxDJ7y0yWDmju0SoeI7ZJ7dKfeG0Apkx1kyZfIxuoKWL"
-//        ]
-
-        request.allHTTPHeaderFields = [
-            "x-api-key": "live_V9dceGDjAuaErdoRcFph8MTyDHtbwAfJ8EEwnukrog1hnoPerRjoEvgGACGX3l9M"
-        ]
-
+        request.allHTTPHeaderFields = apiConfig.headers
         request.httpMethod = "GET"
         return request
     }
@@ -50,21 +34,43 @@ class APIManager {
         self.session = session
     }
 
-    func getData(route: APIRoute) async throws -> [APIModel] {
-        let request = APIFactory.makeAPIRequest(route: route)
-        let (data, _) = try await session.fetchData(for: request)
-        print(data)
-        let breedDecoded = try JSONDecoder().decode([APIModel].self, from: data)
-        let breedWithImage = breedDecoded.filter { $0.image != nil  && $0.image!.url != nil}
+    func getData<T: APIModel>(apiConfig: APIConfiguration) async throws -> [T] {
+        let request = APIFactory.makeAPIRequest(apiConfig: apiConfig)
+        let (data, _) = try await self.session.fetchData(for: request)
+        let breedDecoded = try JSONDecoder().decode([T].self, from: data)
+        let breedWithImage = breedDecoded.filter { $0.image != nil  && $0.image!.url != nil }
         return breedWithImage
-    }
-
-    func postData() {
-
     }
 }
 
-enum APIRoute: String {
-    case races = "breeds"
-    case favourites = "favourites"
+protocol APIConfiguration {
+    var baseURL: String { get }
+    var headers: [String: String] { get }
+    var aPIRoutes: APIRoutes { get }
+    var path: String { get }
+}
+
+enum APIRoutes: String {
+    case breeds
+    case images
+}
+
+extension APIConfiguration where Self: RawRepresentable, Self.RawValue == APIRoutes {
+    var path: String {
+        return rawValue.rawValue
+    }
+}
+
+struct DogAPIRoute: APIConfiguration {
+    var aPIRoutes: APIRoutes
+    var baseURL: String { "https://api.thedogapi.com/v1/" }
+    var headers: [String: String] { ["x-api-key": "live_V9dceGDjAuaErdoRcFph8MTyDHtbwAfJ8EEwnukrog1hnoPerRjoEvgGACGX3l9M"] }
+    var path: String { aPIRoutes.rawValue }
+}
+
+struct CatAPIRoute: APIConfiguration {
+    var aPIRoutes: APIRoutes
+    var baseURL: String { "https://api.thecatapi.com/v1/" }
+    var headers: [String: String] { ["x-api-key": "live_dLyS6QQabRYjUFDnc5L7gxDJ7y0yWDmju0SoeI7ZJ7dKfeG0Apkx1kyZfIxuoKWL"] }
+    var path: String { aPIRoutes.rawValue }
 }

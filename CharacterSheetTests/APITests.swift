@@ -26,15 +26,17 @@ final class APITests: XCTestCase {
     }
 
     func testGetDataFailure() async {
-        mockSession.error = NSError(domain: "", code: 0, userInfo: nil)
+        mockSession.error = NSError(domain: NSURLErrorDomain, code: NSURLErrorNotConnectedToInternet, userInfo: nil)
 
         do {
-            _ = try await apiManager.getData(route: .races)
-            XCTFail("The request should have failed")
-        }
-        catch {
-//            XCTAssert(error is )
+            let _: [DogAPIModel] = try await apiManager.getData(apiConfig: DogAPIRoute(aPIRoutes: .breeds))
+            XCTFail("Expected to throw an error but did not.")
+        } catch {
+            // Check if the error is as expected
+            guard let urlError = error as? URLError else {
+                return XCTFail("Expected URLError but got \(error)")
+            }
+            XCTAssertEqual(urlError.code, .notConnectedToInternet)
         }
     }
-
 }
