@@ -7,9 +7,28 @@
 
 import Foundation
 
-struct APIModel: Codable {
-    let count: Int?
-    let results: [Result]?
+struct APIModel: Decodable {
+//    let count: Int?
+//    let results: [Result]?
+
+    let id: Int
+        let name: String
+        let lifeSpan: String
+        let image: BreedImage?
+
+        enum CodingKeys: String, CodingKey {
+            case id, name, image
+            case lifeSpan = "life_span"
+        }
+
+        var imageURL: URL {
+            URL(string: self.image!.url!)!
+        }
+}
+
+struct BreedImage: Decodable {
+    let id: String?
+    let url: String?
 }
 
 struct Result: Codable {

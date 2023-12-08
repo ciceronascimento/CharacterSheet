@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var classe: [Result] = []
+    var racas: [APIModel] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .blue
@@ -19,8 +19,10 @@ class ViewController: UIViewController {
 
     func testAPI() {
         Task {
-            classe = try await APIManager().getData(route: APIRoute.classes).results ?? []
-            print(classe)
+            racas = try await APIManager().getData(route: APIRoute.races)
+            for i in racas {
+                print(i.name)
+            }
         }
     }
 }
