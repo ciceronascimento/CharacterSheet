@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD60548B2B23757700F9F7B0 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD60548A2B23757700F9F7B0 /* TabController.swift */; };
+		DD60548D2B237AB800F9F7B0 /* CatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD60548C2B237AB800F9F7B0 /* CatsViewController.swift */; };
+		DD60548F2B237AC500F9F7B0 /* DogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD60548E2B237AC500F9F7B0 /* DogsViewController.swift */; };
 		DDDB1DE72B224EDE00A96193 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDB1DE62B224EDE00A96193 /* AppDelegate.swift */; };
 		DDDB1DE92B224EDE00A96193 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDB1DE82B224EDE00A96193 /* SceneDelegate.swift */; };
 		DDDB1DEB2B224EDE00A96193 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDB1DEA2B224EDE00A96193 /* ViewController.swift */; };
@@ -39,6 +42,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DD60548A2B23757700F9F7B0 /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
+		DD60548C2B237AB800F9F7B0 /* CatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsViewController.swift; sourceTree = "<group>"; };
+		DD60548E2B237AC500F9F7B0 /* DogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogsViewController.swift; sourceTree = "<group>"; };
 		DDDB1DE32B224EDE00A96193 /* CharacterSheet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CharacterSheet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDDB1DE62B224EDE00A96193 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDDB1DE82B224EDE00A96193 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +116,9 @@
 				DDDB1DE62B224EDE00A96193 /* AppDelegate.swift */,
 				DDDB1DE82B224EDE00A96193 /* SceneDelegate.swift */,
 				DDDB1DEA2B224EDE00A96193 /* ViewController.swift */,
+				DD60548A2B23757700F9F7B0 /* TabController.swift */,
+				DD60548C2B237AB800F9F7B0 /* CatsViewController.swift */,
+				DD60548E2B237AC500F9F7B0 /* DogsViewController.swift */,
 				DDDB1E1C2B225D1A00A96193 /* APIModel.swift */,
 				DDDB1E1A2B2258B700A96193 /* APIManager.swift */,
 				DDDB1DF22B224EE000A96193 /* Assets.xcassets */,
@@ -268,11 +277,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD60548B2B23757700F9F7B0 /* TabController.swift in Sources */,
 				DDDB1DEB2B224EDE00A96193 /* ViewController.swift in Sources */,
 				DDDB1DF12B224EDE00A96193 /* CharacterSheet.xcdatamodeld in Sources */,
 				DDDB1E1B2B2258B700A96193 /* APIManager.swift in Sources */,
 				DDDB1DE72B224EDE00A96193 /* AppDelegate.swift in Sources */,
+				DD60548D2B237AB800F9F7B0 /* CatsViewController.swift in Sources */,
 				DDDB1E1D2B225D1A00A96193 /* APIModel.swift in Sources */,
+				DD60548F2B237AC500F9F7B0 /* DogsViewController.swift in Sources */,
 				DDDB1DE92B224EDE00A96193 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
