@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension DogsViewController {
+extension PetsViewController {
     func setupStackView() {
         scrollView.addSubview(stackView)
         stackView.axis = .vertical
@@ -22,7 +22,7 @@ extension DogsViewController {
         ])
     }
 }
-extension DogsViewController {
+extension PetsViewController {
     func addContentToStackView() {
 
         let favouriteCats = favCollectionView.createCollectionView()

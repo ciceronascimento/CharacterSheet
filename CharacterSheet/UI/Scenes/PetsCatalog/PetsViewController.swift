@@ -9,7 +9,7 @@ import UIKit
 import Combine
 import SwiftUI
 
-class DogsViewController<T: APIModel>: UIViewController {
+class PetsViewController<T: APIModel>: UIViewController {
     let apiManager: APIManager<T>
 
     //MARK: ViewModel

@@ -33,14 +33,6 @@ class APIManager<T: APIModel> {
         let breedWithImage = breedDecoded.filter { $0.image != nil  && $0.image!.url != nil }
         return breedWithImage
     }
-
-    //    func getData(apiConfig: APIConfiguration) async throws -> [T] {
-    //        let request = APIFactory.makeAPIRequest(apiConfig: apiConfig)
-    //        let (data, _) = try await self.session.fetchData(for: request)
-    //        let breedDecoded = try JSONDecoder().decode([T].self, from: data)
-    //        let breedWithImage = breedDecoded.filter { $0.image != nil  && $0.image!.url != nil }
-    //        return breedWithImage
-    //    }
 }
 
 enum APIRoutes: String {

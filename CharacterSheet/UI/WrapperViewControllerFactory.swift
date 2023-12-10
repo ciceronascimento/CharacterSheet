@@ -12,8 +12,8 @@ struct WrapperViewControllerFactory {
         let catAPIManager = APIManager<CatAPIModel>(configuration: CatAPIConfiguration(aPIRoutes: .breeds))
         let dogAPIManager = APIManager<DogAPIModel>(configuration: DogAPIConfiguration(aPIRoutes: .breeds))
         let viewController = WrapperViewController(
-            catViewController: DogsViewController<CatAPIModel>(apiManager: catAPIManager),
-            dogViewController: DogsViewController<DogAPIModel>(apiManager: dogAPIManager)
+            catViewController: PetsViewController<CatAPIModel>(apiManager: catAPIManager),
+            dogViewController: PetsViewController<DogAPIModel>(apiManager: dogAPIManager)
         )
 
         return viewController

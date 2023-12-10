@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DD60548F2B237AC500F9F7B0 /* DogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD60548E2B237AC500F9F7B0 /* DogsViewController.swift */; };
+		DD60548F2B237AC500F9F7B0 /* PetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD60548E2B237AC500F9F7B0 /* PetsViewController.swift */; };
 		DD6054912B23851F00F9F7B0 /* DogAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6054902B23851F00F9F7B0 /* DogAPIModel.swift */; };
 		DD6054942B23A69F00F9F7B0 /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6054932B23A69F00F9F7B0 /* APIConfiguration.swift */; };
 		DD60549B2B248C8C00F9F7B0 /* PetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD60549A2B248C8C00F9F7B0 /* PetsViewModel.swift */; };
@@ -47,7 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DD60548E2B237AC500F9F7B0 /* DogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogsViewController.swift; sourceTree = "<group>"; };
+		DD60548E2B237AC500F9F7B0 /* PetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsViewController.swift; sourceTree = "<group>"; };
 		DD6054902B23851F00F9F7B0 /* DogAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogAPIModel.swift; sourceTree = "<group>"; };
 		DD6054932B23A69F00F9F7B0 /* APIConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfiguration.swift; sourceTree = "<group>"; };
 		DD60549A2B248C8C00F9F7B0 /* PetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsViewModel.swift; sourceTree = "<group>"; };
@@ -120,12 +120,9 @@
 		DD6054962B23B5B400F9F7B0 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				DD6054992B23B60500F9F7B0 /* DogsCatalog */,
-				DD6054982B23B5FA00F9F7B0 /* CatsCatalog */,
+				DD6054A82B25FDE900F9F7B0 /* Components */,
+				DD6054982B23B5FA00F9F7B0 /* PetsCatalog */,
 				DD6054972B23B5C200F9F7B0 /* TabBar */,
-				DD60549C2B249E9600F9F7B0 /* FavouritesCollectionView.swift */,
-				DD6054A02B24DD6000F9F7B0 /* PetsStackViewController.swift */,
-				DD60549E2B24D9A400F9F7B0 /* AllPetsTableViewController.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -137,20 +134,23 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		DD6054982B23B5FA00F9F7B0 /* CatsCatalog */ = {
+		DD6054982B23B5FA00F9F7B0 /* PetsCatalog */ = {
 			isa = PBXGroup;
 			children = (
+				DD60548E2B237AC500F9F7B0 /* PetsViewController.swift */,
 				DD60549A2B248C8C00F9F7B0 /* PetsViewModel.swift */,
 			);
-			path = CatsCatalog;
+			path = PetsCatalog;
 			sourceTree = "<group>";
 		};
-		DD6054992B23B60500F9F7B0 /* DogsCatalog */ = {
+		DD6054A82B25FDE900F9F7B0 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				DD60548E2B237AC500F9F7B0 /* DogsViewController.swift */,
+				DD60549C2B249E9600F9F7B0 /* FavouritesCollectionView.swift */,
+				DD6054A02B24DD6000F9F7B0 /* PetsStackViewController.swift */,
+				DD60549E2B24D9A400F9F7B0 /* AllPetsTableViewController.swift */,
 			);
-			path = DogsCatalog;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		DDDB1DDA2B224EDE00A96193 = {
@@ -350,7 +350,7 @@
 				DDDB1E1D2B225D1A00A96193 /* CatAPIModel.swift in Sources */,
 				DD60549D2B249E9600F9F7B0 /* FavouritesCollectionView.swift in Sources */,
 				DD6054A12B24DD6000F9F7B0 /* PetsStackViewController.swift in Sources */,
-				DD60548F2B237AC500F9F7B0 /* DogsViewController.swift in Sources */,
+				DD60548F2B237AC500F9F7B0 /* PetsViewController.swift in Sources */,
 				DD60549F2B24D9A400F9F7B0 /* AllPetsTableViewController.swift in Sources */,
 				DD60549B2B248C8C00F9F7B0 /* PetsViewModel.swift in Sources */,
 				DDDB1DE92B224EDE00A96193 /* SceneDelegate.swift in Sources */,

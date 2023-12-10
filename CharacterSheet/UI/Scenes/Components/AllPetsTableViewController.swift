@@ -12,7 +12,8 @@ class AllPetsTableViewController: UIViewController {
 
     var petsViewModel: PetsViewModel!
     var tableView: UITableView!
-    var isFav: Bool = false
+
+    private var isFav: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +55,8 @@ extension AllPetsTableViewController: UITableViewDataSource, UITableViewDelegate
                 Spacer()
                 Button(action: {
                     self.isFav.toggle()
-
+                    self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                    print("\(raca.name),  \(self.isFav), \(indexPath)")
                 }, label: {
                     Image(systemName: self.isFav ? "star.fill" : "star")
                 })
