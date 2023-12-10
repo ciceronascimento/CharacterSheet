@@ -6,23 +6,70 @@
 //
 
 import UIKit
+import Combine
+import SwiftUI
 
-class DogsViewController: UIViewController {
-    
-    var racas: [DogAPIModel] = []
+class DogsViewController<T: APIModel>: UIViewController {
+    let apiManager: APIManager<T>
+
+    //MARK: ViewModel
+    private(set) var petsViewModel = PetsViewModel()
+
+    //MARK: Compose config
+    private var cancellables = Set<AnyCancellable>()
+
+    //MARK: States
+    @State var isFav: Bool = false
+
+    // MARK: Components confg
+    let scrollView = UIScrollView()
+    let stackView = UIStackView()
+    var favCollectionView: FavouritesCollectionView!
+    var allPetsTableView: AllPetsTableViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("ApiManager: \(apiManager)")
         view.backgroundColor = .white
-        testAPI()
+        petsViewModel.fetchPets(apiManager: apiManager)
+
+        favCollectionView = FavouritesCollectionView()
+        favCollectionView.petsViewModel = petsViewModel
+
+        allPetsTableView = AllPetsTableViewController()
+        allPetsTableView.petsViewModel = petsViewModel
+
+        setupScrollView()
+        setupStackView()
+        addContentToStackView()
+        setupViewModel()
     }
 
-    func testAPI() {
-        Task {
-            racas = try await APIManager().getData(apiConfig: DogAPIRoute(aPIRoutes: .breeds))
-            for i in racas {
-                print(i.name)
-            }
-        }
+    init(apiManager: APIManager<T>) {
+        self.apiManager = apiManager
+        super.init(nibName: nil, bundle: nil)
     }
+    required init?(coder: NSCoder) { nil }
+
+    func setupViewModel() {
+        petsViewModel.$petImages
+            .receive(on: RunLoop.main)
+            .sink{ [weak self] _ in
+                self?.allPetsTableView.tableView.reloadData()
+                self?.favCollectionView.collectionView.reloadData()
+            }
+            .store(in: &cancellables)
+    }
+
+    func setupScrollView() {
+        view.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+
 }

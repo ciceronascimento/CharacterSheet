@@ -29,7 +29,7 @@ final class APITests: XCTestCase {
         mockSession.error = NSError(domain: NSURLErrorDomain, code: NSURLErrorNotConnectedToInternet, userInfo: nil)
 
         do {
-            let _: [DogAPIModel] = try await apiManager.getData(apiConfig: DogAPIRoute(aPIRoutes: .breeds))
+            let _: [DogAPIModel] = try await apiManager.getData(apiConfig: DogAPIConfiguration(aPIRoutes: .breeds))
             XCTFail("Expected to throw an error but did not.")
         } catch {
             // Check if the error is as expected

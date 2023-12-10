@@ -14,17 +14,16 @@ protocol APIConfiguration {
     var path: String { get }
 }
 
-
-struct DogAPIRoute: APIConfiguration {
+struct DogAPIConfiguration: APIConfiguration {
     var aPIRoutes: APIRoutes
     var baseURL: String { "https://api.thedogapi.com/v1/" }
     var headers: [String: String] { ["x-api-key": "live_V9dceGDjAuaErdoRcFph8MTyDHtbwAfJ8EEwnukrog1hnoPerRjoEvgGACGX3l9M"] }
     var path: String { aPIRoutes.rawValue }
 }
 
-struct CatAPIRoute: APIConfiguration {
+struct CatAPIConfiguration: APIConfiguration {
     var aPIRoutes: APIRoutes
-    var baseURL: String { "https://api.thecatapi.com/v1/" }
-    var headers: [String: String] { ["x-api-key": "live_dLyS6QQabRYjUFDnc5L7gxDJ7y0yWDmju0SoeI7ZJ7dKfeG0Apkx1kyZfIxuoKWL"] }
-    var path: String { aPIRoutes.rawValue }
+    var baseURL: String { return "https://api.thecatapi.com/v1/" }
+    var headers: [String: String] { return ["x-api-key": "live_dLyS6QQabRYjUFDnc5L7gxDJ7y0yWDmju0SoeI7ZJ7dKfeG0Apkx1kyZfIxuoKWL"] }
+    var path: String { return aPIRoutes.rawValue }
 }

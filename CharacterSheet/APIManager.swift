@@ -17,20 +17,30 @@ extension URLSession: NetworkSession {
     }
 }
 
-class APIManager {
+class APIManager<T: APIModel> {
     private let session: NetworkSession
+    var configuration: APIConfiguration?
 
-    init(session: NetworkSession = URLSession.shared) {
+    init(session: NetworkSession = URLSession.shared, configuration: APIConfiguration) {
         self.session = session
+        self .configuration = configuration
     }
 
-    func getData<T: APIModel>(apiConfig: APIConfiguration) async throws -> [T] {
-        let request = APIFactory.makeAPIRequest(apiConfig: apiConfig)
+    func fetchREquest() async throws -> [T] {
+        let request = APIFactory.makeAPIRequest(apiConfig: configuration!)
         let (data, _) = try await self.session.fetchData(for: request)
         let breedDecoded = try JSONDecoder().decode([T].self, from: data)
         let breedWithImage = breedDecoded.filter { $0.image != nil  && $0.image!.url != nil }
         return breedWithImage
     }
+
+    //    func getData(apiConfig: APIConfiguration) async throws -> [T] {
+    //        let request = APIFactory.makeAPIRequest(apiConfig: apiConfig)
+    //        let (data, _) = try await self.session.fetchData(for: request)
+    //        let breedDecoded = try JSONDecoder().decode([T].self, from: data)
+    //        let breedWithImage = breedDecoded.filter { $0.image != nil  && $0.image!.url != nil }
+    //        return breedWithImage
+    //    }
 }
 
 enum APIRoutes: String {
