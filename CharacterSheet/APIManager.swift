@@ -19,33 +19,52 @@ extension URLSession: NetworkSession {
 
 class APIManager<T: APIModel> {
     private let session: NetworkSession
-    var configuration: APIConfiguration?
+    var configuration: APIConfiguration
 
     init(session: NetworkSession = URLSession.shared, configuration: APIConfiguration) {
         self.session = session
-        self .configuration = configuration
+        self.configuration = configuration
     }
 
     func fetchREquest() async throws -> [T] {
-        let request = APIFactory.makeAPIRequest(apiConfig: configuration!)
+//        guard let config = configuration else { return }
+        let request = APIFactory.makeAPIGetRequest(apiConfig: configuration)
         let (data, _) = try await self.session.fetchData(for: request)
         let breedDecoded = try JSONDecoder().decode([T].self, from: data)
         let breedWithImage = breedDecoded.filter { $0.image != nil  && $0.image!.url != nil }
         return breedWithImage
     }
+
+    //    func getData(apiConfig: APIConfiguration) async throws -> [T] {
+    //        let request = APIFactory.makeAPIRequest(apiConfig: apiConfig)
+    //        let (data, _) = try await self.session.fetchData(for: request)
+    //        let breedDecoded = try JSONDecoder().decode([T].self, from: data)
+    //        let breedWithImage = breedDecoded.filter { $0.image != nil  && $0.image!.url != nil }
+    //        return breedWithImage
+    //    }
+
 }
 
 enum APIRoutes: String {
     case breeds
     case images
+    case favourites
 }
 
 struct APIFactory {
-    static func makeAPIRequest(apiConfig: APIConfiguration) -> URLRequest {
+    static func makeAPIGetRequest(apiConfig: APIConfiguration) -> URLRequest {
         let url = URL(string: apiConfig.baseURL + apiConfig.path)!
         var request = URLRequest(url: url)
         request.allHTTPHeaderFields = apiConfig.headers
         request.httpMethod = "GET"
+        return request
+    }
+
+    static func makeAPIPostRequest(apiConfig: APIConfiguration) -> URLRequest {
+        let url = URL(string: apiConfig.baseURL + apiConfig.path)!
+        var request = URLRequest(url: url)
+        request.allHTTPHeaderFields = apiConfig.headers
+        request.httpMethod = "POST"
         return request
     }
 }

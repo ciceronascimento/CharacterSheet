@@ -8,14 +8,17 @@
 import Foundation
 
 struct WrapperViewControllerFactory {
-    static func make() -> WrapperViewController {
+    static func make() -> TabViewController {
         let catAPIManager = APIManager<CatAPIModel>(configuration: CatAPIConfiguration(aPIRoutes: .breeds))
         let dogAPIManager = APIManager<DogAPIModel>(configuration: DogAPIConfiguration(aPIRoutes: .breeds))
-        let viewController = WrapperViewController(
-            catViewController: PetsViewController<CatAPIModel>(apiManager: catAPIManager),
-            dogViewController: PetsViewController<DogAPIModel>(apiManager: dogAPIManager)
-        )
+        
+        let catViewControler = PetsViewController<CatAPIModel>(apiManager: catAPIManager)
+        let dogViewController = PetsViewController<DogAPIModel>(apiManager: dogAPIManager)
 
-        return viewController
+        let tabViewController = TabViewController( catViewController: catViewControler,
+                                                   dogViewController: dogViewController)
+
+        return tabViewController
     }
 }
+

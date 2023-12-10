@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class WrapperViewController: UITabBarController {
+class TabViewController: UITabBarController {
     let catViewController: UIViewController
     let dogViewController: UIViewController
 
