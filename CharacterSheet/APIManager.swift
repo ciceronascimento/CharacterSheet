@@ -30,11 +30,19 @@ enum APIError: Error {
     case unknownError
 }
 
-class APIManager<T: APIModel> {
+protocol APIManagerProtocol {
+    associatedtype T: APIModel
+    var configuration: APIConfiguration { get }
+
+    init(session: NetworkSession, configuration: APIConfiguration)
+    func fetchRequest() async throws -> [T]
+}
+
+class APIManager<T: APIModel>: APIManagerProtocol {
     private let session: NetworkSession
     var configuration: APIConfiguration
 
-    init(session: NetworkSession = URLSession.shared, configuration: APIConfiguration) {
+    required init(session: NetworkSession = URLSession.shared, configuration: APIConfiguration) {
         self.session = session
         self.configuration = configuration
     }
