@@ -11,10 +11,10 @@ import Combine
 class PetsViewController<T: APIModel>: UIViewController {
     let apiManager: APIManager<T>
 
-    //MARK: ViewModel
+    // MARK: ViewModel
     private(set) var petsViewModel = PetsViewModel()
 
-    //MARK: Compose config
+    // MARK: Combine config
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: Components confg
@@ -50,7 +50,7 @@ class PetsViewController<T: APIModel>: UIViewController {
     func setupViewModel() {
         petsViewModel.$petImages
             .receive(on: RunLoop.main)
-            .sink{ [weak self] _ in
+            .sink { [weak self] _ in
                 self?.allPetsTableView.tableView.reloadData()
                 self?.favCollectionView.collectionView.reloadData()
             }

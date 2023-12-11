@@ -10,7 +10,7 @@ import UIKit
 import SwiftUI
 
 class FavouritesCollectionView: UIViewController {
-    
+
     var petsViewModel: PetsViewModel!
     var collectionView: UICollectionView!
 
@@ -37,13 +37,16 @@ class FavouritesCollectionView: UIViewController {
     }
 }
 
-extension FavouritesCollectionView: UICollectionViewDataSource, UICollectionViewDelegate {
+extension FavouritesCollectionView: UICollectionViewDataSource,
+                                    UICollectionViewDelegate {
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         return petsViewModel.petsApiModel.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pets", for: indexPath)
 
         cell.contentConfiguration = UIHostingConfiguration {

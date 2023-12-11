@@ -32,7 +32,7 @@ class AllPetsTableViewController: UIViewController {
 
 }
 extension AllPetsTableViewController: UITableViewDataSource, UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "All Pets"
     }

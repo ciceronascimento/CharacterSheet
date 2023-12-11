@@ -29,4 +29,3 @@ struct DogAPIModel: APIModel {
         URL(string: self.image!.url!)!
     }
 }
-

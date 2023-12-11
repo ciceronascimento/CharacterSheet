@@ -24,13 +24,15 @@ class TabViewController: UITabBarController {
     }
 
     private func setupTab() {
-        let cats = self.createNav(with: "Cats", and: UIImage(systemName: "cat.fill"), vc: catViewController)
-        let dogs = self.createNav(with: "Dogs", and: UIImage(systemName: "dog.fill"), vc: dogViewController)
+        let cats = self.createNav(with: "Cats", and: UIImage(systemName: "cat.fill"), viewController: catViewController)
+        let dogs = self.createNav(with: "Dogs", and: UIImage(systemName: "dog.fill"), viewController: dogViewController)
         self.setViewControllers([cats, dogs], animated: true)
     }
 
-    private func createNav(with title: String, and image: UIImage?, vc: UIViewController) -> UINavigationController {
-        let nav = UINavigationController(rootViewController: vc)
+    private func createNav(with title: String,
+                           and image: UIImage?,
+                           viewController: UIViewController) -> UINavigationController {
+        let nav = UINavigationController(rootViewController: viewController)
         nav.tabBarItem.title = title
         nav.tabBarItem.image = image
         nav.navigationBar.prefersLargeTitles = true
@@ -38,5 +40,3 @@ class TabViewController: UITabBarController {
         return nav
     }
 }
-
-

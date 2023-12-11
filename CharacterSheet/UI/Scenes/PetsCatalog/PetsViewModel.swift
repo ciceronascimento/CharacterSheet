@@ -5,7 +5,6 @@
 //  Created by Cicero Nascimento on 09/12/23.
 //
 
-
 import SwiftUI
 
 class PetsViewModel: ObservableObject {

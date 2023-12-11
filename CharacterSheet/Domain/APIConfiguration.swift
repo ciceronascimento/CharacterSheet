@@ -14,7 +14,6 @@ protocol APIConfiguration {
     var path: String { get }
 }
 
-
 struct DogAPIConfiguration: APIConfiguration {
     var aPIRoutes: APIRoutes
     var baseURL: String { "https://api.thedogapi.com/v1/" }
