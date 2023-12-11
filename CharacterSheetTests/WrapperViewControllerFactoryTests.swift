@@ -6,30 +6,34 @@
 //
 
 import XCTest
+@testable import CharacterSheet
 
-final class WrapperViewControllerFactoryTests: XCTestCase {
+class WrapperViewControllerFactoryTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+    func testMakeFunction() {
+        let tabViewController = WrapperViewControllerFactory.make()
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+        // Verifica se TabViewController é do tipo esperado
+        XCTAssertNotNil(tabViewController, "TabViewController não deve ser nil")
+//        XCTAssertTrue(tabViewController is TabViewController, "Deve ser uma instância de TabViewController")
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        // Verifica os ViewControllers dentro do TabViewController
+        guard let catViewController = tabViewController.catViewController as? PetsViewController<CatAPIModel>,
+              let dogViewController = tabViewController.dogViewController as? PetsViewController<DogAPIModel> else {
+            XCTFail("Os ViewControllers devem ser do tipo correto")
+            return
         }
-    }
 
+        // Verifica as configurações da API para CatAPIManager
+        XCTAssertEqual(catViewController.apiManager.configuration.baseURL, "https://api.thecatapi.com/v1/",
+                       "URL base da CatAPI deve ser correta")
+        XCTAssertEqual(catViewController.apiManager.configuration.aPIRoutes, .breeds,
+                       "APIRoutes da CatAPI deve ser 'breeds'")
+
+        // Verifica as configurações da API para DogAPIManager
+        XCTAssertEqual(dogViewController.apiManager.configuration.baseURL,
+                       "https://api.thedogapi.com/v1/", "URL base da DogAPI deve ser correta")
+        XCTAssertEqual(dogViewController.apiManager.configuration.aPIRoutes,
+                       .breeds, "APIRoutes da DogAPI deve ser 'breeds'")
+    }
 }

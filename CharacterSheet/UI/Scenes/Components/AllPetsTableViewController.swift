@@ -38,10 +38,20 @@ extension AllPetsTableViewController: UITableViewDataSource, UITableViewDelegate
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let _ = petsViewModel.errorMessage {
+            return 1
+        }
         return petsViewModel.petsApiModel.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        if let message = petsViewModel.errorMessage {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "allPets", for: indexPath)
+            cell.textLabel?.text = message
+            return cell
+        }
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "allPets", for: indexPath)
         cell.contentConfiguration = UIHostingConfiguration {
             AllPetsCell(petsViewModel: petsViewModel, indice: indexPath.row)

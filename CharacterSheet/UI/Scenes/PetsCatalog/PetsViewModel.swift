@@ -12,6 +12,8 @@ class PetsViewModel: ObservableObject {
     @Published var favPets: [APIModel] = []
     @Published var petImages: [UIImage]?
 
+    @Published var errorMessage: String?
+
     func loadImage() {
         Task {
            petImages = try await downloadloadImage()
@@ -34,8 +36,31 @@ class PetsViewModel: ObservableObject {
 
     func fetchPets<T: APIModel>(apiManager: APIManager<T>) {
         Task {
-            petsApiModel = try await apiManager.fetchRequest()
-            petImages = try await downloadloadImage()
+            do {
+                petsApiModel = try await apiManager.fetchRequest()
+                petImages = try await downloadloadImage()
+            } catch {
+                handleAPIError(error)
+            }
+        }
+    }
+
+    func handleAPIError(_ error: Error) {
+        if let apiError = error as? APIError {
+            switch apiError {
+            case .networkError:
+                errorMessage = "Problema de conexão com a internet. Por favor reinicie o aplicativo"
+            case .httpError(let statusCode):
+                errorMessage = "Erro HTTP: \(statusCode)"
+            case .decodingError:
+                errorMessage = "Erro ao processar os dados."
+            case .invalidURL:
+                errorMessage = "URL inválida."
+            case .unknownError:
+                errorMessage = "Erro desconhecido."
+            }
+        } else {
+            errorMessage = "Erro inesperado"
         }
     }
 }

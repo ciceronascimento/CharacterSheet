@@ -48,6 +48,12 @@ class PetsViewController<T: APIModel>: UIViewController {
     required init?(coder: NSCoder) { nil }
 
     func setupViewModel() {
+        petsViewModel.$errorMessage
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.allPetsTableView.tableView.reloadData()
+            }
+            .store(in: &cancellables)
         petsViewModel.$petImages
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
@@ -55,6 +61,8 @@ class PetsViewController<T: APIModel>: UIViewController {
                 self?.favCollectionView.collectionView.reloadData()
             }
             .store(in: &cancellables)
+
+
     }
 
     func setupScrollView() {

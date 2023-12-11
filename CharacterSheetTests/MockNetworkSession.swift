@@ -9,7 +9,6 @@ import Foundation
 @testable import CharacterSheet
 
 class MockNetworkSession: NetworkSession {
-
     var data: Data?
     var response: URLResponse?
     var error: Error?
@@ -18,6 +17,9 @@ class MockNetworkSession: NetworkSession {
         if let error = error {
             throw error
         }
-        return (data ?? Data(), response ?? URLResponse())
+        guard let data = data, let response = response else {
+            throw APIError.unknownError
+        }
+        return (data, response)
     }
 }
