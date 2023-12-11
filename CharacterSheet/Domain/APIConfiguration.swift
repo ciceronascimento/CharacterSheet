@@ -14,10 +14,11 @@ protocol APIConfiguration {
     var path: String { get }
 }
 
+
 struct DogAPIConfiguration: APIConfiguration {
     var aPIRoutes: APIRoutes
     var baseURL: String { "https://api.thedogapi.com/v1/" }
-    var headers: [String: String] { ["x-api-key": "live_V9dceGDjAuaErdoRcFph8MTyDHtbwAfJ8EEwnukrog1hnoPerRjoEvgGACGX3l9M"] }
+    var headers: [String: String] { ["x-api-key": "live_V9dceGDjAuaErdoRcFph8MTyDHtbwAfJ8EEwnukrog1hnoPerRjoEvgGACGX3l9M"]}
     var path: String { aPIRoutes.rawValue }
 }
 

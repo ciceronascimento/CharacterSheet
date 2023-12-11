@@ -16,6 +16,8 @@
 		DD6054A12B24DD6000F9F7B0 /* PetsStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6054A02B24DD6000F9F7B0 /* PetsStackViewController.swift */; };
 		DD6054A52B25175F00F9F7B0 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6054A42B25175F00F9F7B0 /* TabViewController.swift */; };
 		DD6054A72B25182D00F9F7B0 /* WrapperViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6054A62B25182D00F9F7B0 /* WrapperViewControllerFactory.swift */; };
+		DD6054AA2B273C8B00F9F7B0 /* AllPetsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6054A92B273C8B00F9F7B0 /* AllPetsCell.swift */; };
+		DD6054AC2B273E9F00F9F7B0 /* FavPetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6054AB2B273E9F00F9F7B0 /* FavPetsView.swift */; };
 		DDDB1DE72B224EDE00A96193 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDB1DE62B224EDE00A96193 /* AppDelegate.swift */; };
 		DDDB1DE92B224EDE00A96193 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDB1DE82B224EDE00A96193 /* SceneDelegate.swift */; };
 		DDDB1DF12B224EDE00A96193 /* CharacterSheet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDDB1DEF2B224EDE00A96193 /* CharacterSheet.xcdatamodeld */; };
@@ -56,6 +58,8 @@
 		DD6054A02B24DD6000F9F7B0 /* PetsStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsStackViewController.swift; sourceTree = "<group>"; };
 		DD6054A42B25175F00F9F7B0 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		DD6054A62B25182D00F9F7B0 /* WrapperViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperViewControllerFactory.swift; sourceTree = "<group>"; };
+		DD6054A92B273C8B00F9F7B0 /* AllPetsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPetsCell.swift; sourceTree = "<group>"; };
+		DD6054AB2B273E9F00F9F7B0 /* FavPetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavPetsView.swift; sourceTree = "<group>"; };
 		DDDB1DE32B224EDE00A96193 /* CharacterSheet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CharacterSheet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDDB1DE62B224EDE00A96193 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDDB1DE82B224EDE00A96193 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +153,8 @@
 				DD60549C2B249E9600F9F7B0 /* FavouritesCollectionView.swift */,
 				DD6054A02B24DD6000F9F7B0 /* PetsStackViewController.swift */,
 				DD60549E2B24D9A400F9F7B0 /* AllPetsTableViewController.swift */,
+				DD6054AB2B273E9F00F9F7B0 /* FavPetsView.swift */,
+				DD6054A92B273C8B00F9F7B0 /* AllPetsCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -340,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD6054AC2B273E9F00F9F7B0 /* FavPetsView.swift in Sources */,
 				DD6054A72B25182D00F9F7B0 /* WrapperViewControllerFactory.swift in Sources */,
 				DD6054912B23851F00F9F7B0 /* DogAPIModel.swift in Sources */,
 				DDDB1DF12B224EDE00A96193 /* CharacterSheet.xcdatamodeld in Sources */,
@@ -348,6 +355,7 @@
 				DD6054A52B25175F00F9F7B0 /* TabViewController.swift in Sources */,
 				DD6054942B23A69F00F9F7B0 /* APIConfiguration.swift in Sources */,
 				DDDB1E1D2B225D1A00A96193 /* CatAPIModel.swift in Sources */,
+				DD6054AA2B273C8B00F9F7B0 /* AllPetsCell.swift in Sources */,
 				DD60549D2B249E9600F9F7B0 /* FavouritesCollectionView.swift in Sources */,
 				DD6054A12B24DD6000F9F7B0 /* PetsStackViewController.swift in Sources */,
 				DD60548F2B237AC500F9F7B0 /* PetsViewController.swift in Sources */,

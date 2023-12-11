@@ -43,28 +43,9 @@ extension AllPetsTableViewController: UITableViewDataSource, UITableViewDelegate
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "allPets", for: indexPath)
-        let raca = petsViewModel.petsApiModel[indexPath.row]
-
         cell.contentConfiguration = UIHostingConfiguration {
-            HStack {
-                Image(uiImage: petsViewModel.petImages![indexPath.row])
-                    .resizable()
-                    .frame(width: 60, height: 60)
-                    .scaledToFit()
-                Text(raca.name)
-                Spacer()
-                Button(action: {
-                    self.isFav.toggle()
-                    self.tableView.reloadRows(at: [indexPath], with: .automatic)
-                    print("\(raca.name),  \(self.isFav), \(indexPath)")
-                }, label: {
-                    Image(systemName: self.isFav ? "star.fill" : "star")
-                })
-            }
+            AllPetsCell(petsViewModel: petsViewModel, indice: indexPath.row)
         }
-        cell.textLabel?.text = raca.name
-        cell.imageView?.image = petsViewModel.petImages?[indexPath.row]
-        cell.backgroundColor = .clear
         return cell
     }
 }

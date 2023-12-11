@@ -13,8 +13,21 @@ protocol NetworkSession {
 
 extension URLSession: NetworkSession {
     func fetchData(for request: URLRequest) async throws -> (Data, URLResponse) {
-        return try await self.data(for: request)
+        do {
+            let (data, response) = try await self.data(for: request)
+            return (data, response)
+        } catch {
+            throw APIError.networkError(error)
+        }
     }
+}
+
+enum APIError: Error {
+    case networkError(Error)
+    case httpError(Int)
+    case decodingError
+    case invalidURL
+    case unknownError
 }
 
 class APIManager<T: APIModel> {
@@ -26,45 +39,44 @@ class APIManager<T: APIModel> {
         self.configuration = configuration
     }
 
-    func fetchREquest() async throws -> [T] {
-//        guard let config = configuration else { return }
-        let request = APIFactory.makeAPIGetRequest(apiConfig: configuration)
-        let (data, _) = try await self.session.fetchData(for: request)
-        let breedDecoded = try JSONDecoder().decode([T].self, from: data)
-        let breedWithImage = breedDecoded.filter { $0.image != nil  && $0.image!.url != nil }
-        return breedWithImage
+    func fetchRequest() async throws -> [T] {
+        do {
+             let request = APIFactory.makeGetRequest(apiConfig: configuration)
+             let (data, response) = try await self.session.fetchData(for: request)
+
+             guard let httpResponse = response as? HTTPURLResponse else {
+                 throw APIError.unknownError
+             }
+             guard 200...299 ~= httpResponse.statusCode else {
+                 throw APIError.httpError(httpResponse.statusCode)
+             }
+
+             do {
+                 let breedDecoded = try JSONDecoder().decode([T].self, from: data)
+                 let breedWithImage = breedDecoded.filter { $0.image != nil && $0.image!.url != nil }
+                 return breedWithImage
+             } catch {
+                 throw APIError.decodingError
+             }
+         } catch let error as APIError {
+             throw error
+         } catch {
+             throw APIError.networkError(error)
+         }
     }
-
-    //    func getData(apiConfig: APIConfiguration) async throws -> [T] {
-    //        let request = APIFactory.makeAPIRequest(apiConfig: apiConfig)
-    //        let (data, _) = try await self.session.fetchData(for: request)
-    //        let breedDecoded = try JSONDecoder().decode([T].self, from: data)
-    //        let breedWithImage = breedDecoded.filter { $0.image != nil  && $0.image!.url != nil }
-    //        return breedWithImage
-    //    }
-
 }
 
 enum APIRoutes: String {
     case breeds
-    case images
-    case favourites
+    case favorites
 }
 
 struct APIFactory {
-    static func makeAPIGetRequest(apiConfig: APIConfiguration) -> URLRequest {
+    static func makeGetRequest(apiConfig: APIConfiguration) -> URLRequest {
         let url = URL(string: apiConfig.baseURL + apiConfig.path)!
         var request = URLRequest(url: url)
         request.allHTTPHeaderFields = apiConfig.headers
         request.httpMethod = "GET"
-        return request
-    }
-
-    static func makeAPIPostRequest(apiConfig: APIConfiguration) -> URLRequest {
-        let url = URL(string: apiConfig.baseURL + apiConfig.path)!
-        var request = URLRequest(url: url)
-        request.allHTTPHeaderFields = apiConfig.headers
-        request.httpMethod = "POST"
         return request
     }
 }

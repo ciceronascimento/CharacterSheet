@@ -5,14 +5,13 @@
 //  Created by Cicero Nascimento on 09/12/23.
 //
 
-import Foundation
-import UIKit
+
+import SwiftUI
 
 class PetsViewModel: ObservableObject {
     @Published var petsApiModel: [APIModel] = []
     @Published var favPets: [APIModel] = []
     @Published var petImages: [UIImage]?
-
 
     func loadImage() {
         Task {
@@ -36,7 +35,7 @@ class PetsViewModel: ObservableObject {
 
     func fetchPets<T: APIModel>(apiManager: APIManager<T>) {
         Task {
-            petsApiModel = try await apiManager.fetchREquest()
+            petsApiModel = try await apiManager.fetchRequest()
             petImages = try await downloadloadImage()
         }
     }

@@ -26,7 +26,7 @@ extension PetsViewController {
     func addContentToStackView() {
 
         let favouriteCats = favCollectionView.createCollectionView()
-        favouriteCats.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        favouriteCats.heightAnchor.constraint(equalToConstant: 150).isActive = true
         stackView.addArrangedSubview(favouriteCats)
 
         let allCats = allPetsTableView.createTableView()

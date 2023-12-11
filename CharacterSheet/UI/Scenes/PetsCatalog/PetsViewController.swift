@@ -7,7 +7,6 @@
 
 import UIKit
 import Combine
-import SwiftUI
 
 class PetsViewController<T: APIModel>: UIViewController {
     let apiManager: APIManager<T>
@@ -17,9 +16,6 @@ class PetsViewController<T: APIModel>: UIViewController {
 
     //MARK: Compose config
     private var cancellables = Set<AnyCancellable>()
-
-    //MARK: States
-    @State var isFav: Bool = false
 
     // MARK: Components confg
     let scrollView = UIScrollView()
