@@ -42,7 +42,7 @@ extension FavouritesCollectionView: UICollectionViewDataSource,
 
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return petsViewModel.petsApiModel.count
+        return petsViewModel.animalData.count
     }
 
     func collectionView(_ collectionView: UICollectionView,

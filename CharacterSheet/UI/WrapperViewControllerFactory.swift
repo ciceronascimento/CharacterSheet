@@ -9,18 +9,16 @@ import Foundation
 
 struct WrapperViewControllerFactory {
     static func make(container: DIContainer) -> TabViewController {
-        guard let catAPIManager: APIManager<CatAPIModel> = container.resolve(APIManager<CatAPIModel>.self),
-              let dogAPIManager: APIManager<DogAPIModel> = container.resolve(APIManager<DogAPIModel>.self) else {
+        guard let catAPIManager: APIManager<CatModel> = container.resolve(APIManager<CatModel>.self),
+              let dogAPIManager: APIManager<DogModel> = container.resolve(APIManager<DogModel>.self) else {
             fatalError("Dependencies not registered properly")
         }
 
-        let catViewController = PetsViewController<CatAPIModel>(apiManager: catAPIManager)
-        let dogViewController = PetsViewController<DogAPIModel>(apiManager: dogAPIManager)
+        let catViewController = PetsViewController<CatModel>(apiManager: catAPIManager)
+        let dogViewController = PetsViewController<DogModel>(apiManager: dogAPIManager)
 
         let tabViewController = TabViewController(catViewController: catViewController,
                                                   dogViewController: dogViewController)
-
         return tabViewController
     }
 }
-

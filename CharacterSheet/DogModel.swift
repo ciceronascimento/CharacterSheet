@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol APIModel: Decodable {
+protocol AnimalData: Decodable {
     var name: String { get }
     var lifeSpan: String { get }
     var image: BreedImage? { get }
 }
 
-struct DogAPIModel: APIModel {
+struct DogModel: AnimalData {
 
     let id: Int
     let name: String

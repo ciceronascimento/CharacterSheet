@@ -8,16 +8,13 @@
 import UIKit
 import Combine
 
-class PetsViewController<T: APIModel>: UIViewController {
+class PetsViewController<T: AnimalData>: UIViewController {
+
     let apiManager: APIManager<T>
 
-    // MARK: ViewModel
     private(set) var petsViewModel = PetsViewModel()
-
-    // MARK: Combine config
     private var cancellables = Set<AnyCancellable>()
 
-    // MARK: Components confg
     let scrollView = UIScrollView()
     let stackView = UIStackView()
     var favCollectionView: FavouritesCollectionView!
@@ -27,7 +24,7 @@ class PetsViewController<T: APIModel>: UIViewController {
         super.viewDidLoad()
         print("ApiManager: \(apiManager)")
         view.backgroundColor = .white
-        petsViewModel.fetchPets(apiManager: apiManager)
+        petsViewModel.fetchPets(apiManager: apiManager, completion: {})
 
         favCollectionView = FavouritesCollectionView()
         favCollectionView.petsViewModel = petsViewModel
@@ -45,6 +42,7 @@ class PetsViewController<T: APIModel>: UIViewController {
         self.apiManager = apiManager
         super.init(nibName: nil, bundle: nil)
     }
+
     required init?(coder: NSCoder) { nil }
 
     func setupViewModel() {
@@ -61,8 +59,6 @@ class PetsViewController<T: APIModel>: UIViewController {
                 self?.favCollectionView.collectionView.reloadData()
             }
             .store(in: &cancellables)
-
-
     }
 
     func setupScrollView() {
@@ -75,5 +71,4 @@ class PetsViewController<T: APIModel>: UIViewController {
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-
 }

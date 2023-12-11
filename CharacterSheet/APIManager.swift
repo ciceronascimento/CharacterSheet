@@ -31,14 +31,14 @@ enum APIError: Error {
 }
 
 protocol APIManagerProtocol {
-    associatedtype T: APIModel
+    associatedtype T: AnimalData
     var configuration: APIConfiguration { get }
 
     init(session: NetworkSession, configuration: APIConfiguration)
     func fetchRequest() async throws -> [T]
 }
 
-class APIManager<T: APIModel>: APIManagerProtocol {
+class APIManager<T: AnimalData>: APIManagerProtocol {
     private let session: NetworkSession
     var configuration: APIConfiguration
 
@@ -81,7 +81,7 @@ enum APIRoutes: String {
 
 struct APIFactory {
     static func makeGetRequest(apiConfig: APIConfiguration) -> URLRequest {
-        let url = URL(string: apiConfig.baseURL + apiConfig.path)!
+        let url = URL(string: apiConfig.baseURL + apiConfig.apiPath)!
         var request = URLRequest(url: url)
         request.allHTTPHeaderFields = apiConfig.headers
         request.httpMethod = "GET"
@@ -90,7 +90,7 @@ struct APIFactory {
 }
 
 extension APIConfiguration where Self: RawRepresentable, Self.RawValue == APIRoutes {
-    var path: String {
+    var apiPath: String {
         return rawValue.rawValue
     }
 }

@@ -23,7 +23,7 @@ struct FavPetsView: View {
                         .fill(Material.ultraThinMaterial)
                         .frame(height: 35)
                         .overlay {
-                            Text(petsViewModel.petsApiModel[indice].name)
+                            Text(petsViewModel.animalData[indice].name)
                                 .padding(.horizontal, 10)
                                 .minimumScaleFactor(0.1)
                                 .padding(2)

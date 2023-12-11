@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CatAPIModel: APIModel {
+struct CatModel: AnimalData {
 
     let id: String
     let name: String

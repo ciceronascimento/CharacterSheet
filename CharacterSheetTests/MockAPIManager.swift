@@ -8,8 +8,7 @@
 import Foundation
 @testable import CharacterSheet
 
-
-class MockAPIManager<T: APIModel>: APIManagerProtocol {
+class MockAPIManager<T: AnimalData>: APIManagerProtocol {
     var mockResult: [T]?
     var error: APIError?
 

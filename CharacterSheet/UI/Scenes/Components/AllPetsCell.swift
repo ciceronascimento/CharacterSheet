@@ -16,7 +16,7 @@ struct AllPetsCell: View {
                 .resizable()
                 .frame(width: 60, height: 60)
                 .scaledToFit()
-            Text(petsViewModel.petsApiModel[indice].name)
+            Text(petsViewModel.animalData[indice].name)
             Spacer()
         }
     }

@@ -8,21 +8,15 @@
 import SwiftUI
 
 class PetsViewModel: ObservableObject {
-    @Published var petsApiModel: [APIModel] = []
-    @Published var favPets: [APIModel] = []
-    @Published var petImages: [UIImage]?
 
+    @Published var animalData: [AnimalData] = []
+    @Published var favPets: [AnimalData] = []
+    @Published var petImages: [UIImage]?
     @Published var errorMessage: String?
 
-    func loadImage() {
-        Task {
-           petImages = try await downloadloadImage()
-        }
-    }
-
-    func downloadloadImage() async throws -> [UIImage] {
+    func convertToImage() async throws -> [UIImage] {
         var imagesArray: [UIImage] = []
-        for pet in petsApiModel {
+        for pet in animalData {
             guard let url = pet.image?.url, let imageUrl = URL(string: url) else {
                 continue
             }
@@ -34,13 +28,15 @@ class PetsViewModel: ObservableObject {
         return imagesArray
     }
 
-    func fetchPets<T: APIModel>(apiManager: APIManager<T>) {
+    func fetchPets<T: APIManagerProtocol>(apiManager: T, completion: @escaping () -> Void) where T.T: AnimalData {
         Task {
             do {
-                petsApiModel = try await apiManager.fetchRequest()
-                petImages = try await downloadloadImage()
+                animalData = try await apiManager.fetchRequest()
+                petImages = try await convertToImage()
+                completion()
             } catch {
                 handleAPIError(error)
+                completion()
             }
         }
     }

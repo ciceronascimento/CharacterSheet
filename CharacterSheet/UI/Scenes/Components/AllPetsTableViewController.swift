@@ -41,7 +41,7 @@ extension AllPetsTableViewController: UITableViewDataSource, UITableViewDelegate
         if let _ = petsViewModel.errorMessage {
             return 1
         }
-        return petsViewModel.petsApiModel.count
+        return petsViewModel.animalData.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

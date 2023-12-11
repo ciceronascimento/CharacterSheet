@@ -26,7 +26,7 @@ class APIManagerTests: XCTestCase {
     """
 
     var mockSession: MockNetworkSession!
-    var apiManager: APIManager<CatAPIModel>!
+    var apiManager: APIManager<CatModel>!
     var configuration: APIConfiguration!
     override func setUp() {
         super.setUp()
@@ -87,4 +87,3 @@ class APIManagerTests: XCTestCase {
 //        }
 //    }
 }
-

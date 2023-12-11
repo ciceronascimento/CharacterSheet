@@ -15,9 +15,9 @@ class DIContainer {
     private init() {}
 
     func registerDependencies() {
-        container["APIManager<CatAPIModel>"] = APIManager<CatAPIModel>(session: URLSession.shared,
+        container["APIManager<CatModel>"] = APIManager<CatModel>(session: URLSession.shared,
                                                              configuration: CatAPIConfiguration(aPIRoutes: .breeds))
-        container["APIManager<DogAPIModel>"] = APIManager<DogAPIModel>(session: URLSession.shared,
+        container["APIManager<DogModel>"] = APIManager<DogModel>(session: URLSession.shared,
                                                              configuration: DogAPIConfiguration(aPIRoutes: .breeds))
     }
 
