@@ -9,8 +9,25 @@ import Foundation
 @testable import CharacterSheet
 
 class MockAPIManager<T: AnimalData>: APIManagerProtocol {
+    func postFavPet(animal: CharacterSheet.AnimalData) async throws -> Bool {
+        if let error = error {
+            throw error
+        }
+        return mockPostSuccess
+    }
+
+    func deleteFavoritePet(favoriteID: Int) async throws -> Bool {
+        if let error = error {
+              throw error
+          }
+          return mockDeleteSuccess
+    }
+
     var mockResult: [T]?
     var error: APIError?
+
+    var mockPostSuccess: Bool = false
+    var mockDeleteSuccess: Bool = false
 
     private let session: NetworkSession
     var configuration: APIConfiguration

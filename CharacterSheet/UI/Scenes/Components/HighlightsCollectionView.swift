@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SwiftUI
 
-class FavouritesCollectionView: UIViewController {
+class HighlightsCollectionView: UIViewController {
 
     var petsViewModel: PetsViewModel!
     var collectionView: UICollectionView!
@@ -37,7 +37,7 @@ class FavouritesCollectionView: UIViewController {
     }
 }
 
-extension FavouritesCollectionView: UICollectionViewDataSource,
+extension HighlightsCollectionView: UICollectionViewDataSource,
                                     UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView,

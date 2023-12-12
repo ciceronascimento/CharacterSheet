@@ -16,9 +16,9 @@ class DIContainer {
 
     func registerDependencies() {
         container["APIManager<CatModel>"] = APIManager<CatModel>(session: URLSession.shared,
-                                                             configuration: CatAPIConfiguration(aPIRoutes: .breeds))
+                                                                 configuration: CatAPIConfiguration(apiPath: .breeds))
         container["APIManager<DogModel>"] = APIManager<DogModel>(session: URLSession.shared,
-                                                             configuration: DogAPIConfiguration(aPIRoutes: .breeds))
+                                                                 configuration: DogAPIConfiguration(apiPath: .breeds))
     }
 
     func resolve<Service>(_ serviceType: Service.Type) -> Service? {

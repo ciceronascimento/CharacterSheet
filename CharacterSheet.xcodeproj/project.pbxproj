@@ -11,7 +11,7 @@
 		DD6054912B23851F00F9F7B0 /* DogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6054902B23851F00F9F7B0 /* DogModel.swift */; };
 		DD6054942B23A69F00F9F7B0 /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6054932B23A69F00F9F7B0 /* APIConfiguration.swift */; };
 		DD60549B2B248C8C00F9F7B0 /* PetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD60549A2B248C8C00F9F7B0 /* PetsViewModel.swift */; };
-		DD60549D2B249E9600F9F7B0 /* FavouritesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD60549C2B249E9600F9F7B0 /* FavouritesCollectionView.swift */; };
+		DD60549D2B249E9600F9F7B0 /* HighlightsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD60549C2B249E9600F9F7B0 /* HighlightsCollectionView.swift */; };
 		DD60549F2B24D9A400F9F7B0 /* AllPetsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD60549E2B24D9A400F9F7B0 /* AllPetsTableViewController.swift */; };
 		DD6054A12B24DD6000F9F7B0 /* PetsStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6054A02B24DD6000F9F7B0 /* PetsStackViewController.swift */; };
 		DD6054A52B25175F00F9F7B0 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6054A42B25175F00F9F7B0 /* TabViewController.swift */; };
@@ -57,7 +57,7 @@
 		DD6054902B23851F00F9F7B0 /* DogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogModel.swift; sourceTree = "<group>"; };
 		DD6054932B23A69F00F9F7B0 /* APIConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfiguration.swift; sourceTree = "<group>"; };
 		DD60549A2B248C8C00F9F7B0 /* PetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsViewModel.swift; sourceTree = "<group>"; };
-		DD60549C2B249E9600F9F7B0 /* FavouritesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesCollectionView.swift; sourceTree = "<group>"; };
+		DD60549C2B249E9600F9F7B0 /* HighlightsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightsCollectionView.swift; sourceTree = "<group>"; };
 		DD60549E2B24D9A400F9F7B0 /* AllPetsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPetsTableViewController.swift; sourceTree = "<group>"; };
 		DD6054A02B24DD6000F9F7B0 /* PetsStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsStackViewController.swift; sourceTree = "<group>"; };
 		DD6054A42B25175F00F9F7B0 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
@@ -158,7 +158,7 @@
 		DD6054A82B25FDE900F9F7B0 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				DD60549C2B249E9600F9F7B0 /* FavouritesCollectionView.swift */,
+				DD60549C2B249E9600F9F7B0 /* HighlightsCollectionView.swift */,
 				DD6054A02B24DD6000F9F7B0 /* PetsStackViewController.swift */,
 				DD60549E2B24D9A400F9F7B0 /* AllPetsTableViewController.swift */,
 				DD6054AB2B273E9F00F9F7B0 /* FavPetsView.swift */,
@@ -390,7 +390,7 @@
 				DD6054942B23A69F00F9F7B0 /* APIConfiguration.swift in Sources */,
 				DDDB1E1D2B225D1A00A96193 /* CatModel.swift in Sources */,
 				DD6054AA2B273C8B00F9F7B0 /* AllPetsCell.swift in Sources */,
-				DD60549D2B249E9600F9F7B0 /* FavouritesCollectionView.swift in Sources */,
+				DD60549D2B249E9600F9F7B0 /* HighlightsCollectionView.swift in Sources */,
 				DD6054A12B24DD6000F9F7B0 /* PetsStackViewController.swift in Sources */,
 				DD60548F2B237AC500F9F7B0 /* PetsViewController.swift in Sources */,
 				DD60549F2B24D9A400F9F7B0 /* AllPetsTableViewController.swift in Sources */,

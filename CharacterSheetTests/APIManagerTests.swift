@@ -31,7 +31,7 @@ class APIManagerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         mockSession = MockNetworkSession()
-        configuration = CatAPIConfiguration(aPIRoutes: .breeds)
+        configuration = CatAPIConfiguration(apiPath: .breeds)
         apiManager = APIManager(session: mockSession, configuration: configuration)
     }
 
@@ -73,17 +73,78 @@ class APIManagerTests: XCTestCase {
         }
     }
 
-//
-//    func testFetchRequestFailure() async {
-//        mockSession.error = APIError.networkError(NSError(domain: "", code: -1, userInfo: nil))
-//
-//        do {
-//            let _ = try await apiManager.fetchRequest()
-//            XCTFail("Deveria ter falhado")
-//        } catch APIError.networkError(let error) {
-//            XCTAssertNotNil(error)
-//        } catch {
-//            XCTFail("Tipo de erro inesperado")
-//        }
-//    }
+    func testFetchRequestEmptyData() async {
+        mockSession.data = Data()
+
+        do {
+            _ = try await apiManager.fetchRequest()
+            XCTFail("Deveria ter falhado com dados vazios")
+        } catch {
+            XCTAssertNotNil(error, "Erro esperado com dados vazios")
+        }
+    }
+
+    func testFetchRequestInvalidJSON() async {
+        mockSession.data = "Invalid JSON".data(using: .utf8)
+
+        do {
+            _ = try await apiManager.fetchRequest()
+            XCTFail("Deveria ter falhado com JSON inválido")
+        } catch {
+            XCTAssertNotNil(error, "Erro esperado com JSON inválido")
+        }
+    }
+
+    func testFetchRequestInvalidURL() async {
+        mockSession.response = HTTPURLResponse(url: URL(string: "https://invalidurl.com")!,
+                                               statusCode: 404,
+                                               httpVersion: nil,
+                                               headerFields: nil)!
+
+        do {
+            _ = try await apiManager.fetchRequest()
+            XCTFail("Deveria ter falhado com URL inválida")
+        } catch {
+            XCTAssertNotNil(error, "Erro esperado com URL inválida")
+        }
+    }
+
+    func testFetchRequestServerInternalError() async {
+        mockSession.response = HTTPURLResponse(url: URL(string: "https://example.com")!,
+                                               statusCode: 500,
+                                               httpVersion: nil,
+                                               headerFields: nil)!
+
+        do {
+            _ = try await apiManager.fetchRequest()
+            XCTFail("Deveria ter falhado com erro interno do servidor")
+        } catch {
+            XCTAssertNotNil(error, "Erro esperado com erro interno do servidor")
+        }
+    }
+
+    func testFetchRequestNoInternetConnection() async {
+        mockSession.error = NSError(domain: NSURLErrorDomain, code: NSURLErrorNotConnectedToInternet, userInfo: nil)
+
+        do {
+            _ = try await apiManager.fetchRequest()
+            XCTFail("Deveria ter falhado sem conexão com a internet")
+        } catch {
+            XCTAssertNotNil(error, "Erro esperado sem conexão com a internet")
+        }
+    }
+
+    func testFetchRequestHTTPRedirection() async {
+        mockSession.response = HTTPURLResponse(url: URL(string: "https://example.com")!,
+                                               statusCode: 302,
+                                               httpVersion: nil,
+                                               headerFields: ["Location": "https://redirectedexample.com"])!
+
+        do {
+            _ = try await apiManager.fetchRequest()
+            XCTFail("Deveria ter falhado ou tratado o redirecionamento HTTP")
+        } catch {
+            XCTAssertNotNil(error, "Erro esperado ou tratamento de redirecionamento HTTP")
+        }
+    }
 }

@@ -26,7 +26,7 @@ class PetsViewModelTests: XCTestCase {
     override func setUp() {
         super.setUp()
         mockSession = MockNetworkSession()
-        configuration = CatAPIConfiguration(aPIRoutes: .breeds)
+        configuration = CatAPIConfiguration(apiPath: .breeds)
         viewModel = PetsViewModel()
         mockAPIManager = MockAPIManager(session: mockSession, configuration: configuration)
     }
@@ -58,15 +58,5 @@ class PetsViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.animalData.count, mockPets.count, "The number of pets should match the mock data")
         XCTAssertNil(viewModel.errorMessage, "There should be no error message on successful fetch")
     }
-//
-//    func testFetchPetsFailure() {
-//        mockAPIManager.mockError = APIError.networkError(NSError(domain: "", code: 0, userInfo: nil))
-//
 
-//        viewModel.fetchPets(apiManager: mockAPIManager)
-//
-
-//        XCTAssertTrue(viewModel.petsApiModel.isEmpty, "The pets array should be empty on fetch failure")
-//        XCTAssertNotNil(viewModel.errorMessage, "An error message should be set on fetch failure")
-//    }
 }

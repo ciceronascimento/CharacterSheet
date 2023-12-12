@@ -17,7 +17,7 @@ class PetsViewController<T: AnimalData>: UIViewController {
 
     let scrollView = UIScrollView()
     let stackView = UIStackView()
-    var favCollectionView: FavouritesCollectionView!
+    var favCollectionView: HighlightsCollectionView!
     var allPetsTableView: AllPetsTableViewController!
 
     override func viewDidLoad() {
@@ -26,7 +26,7 @@ class PetsViewController<T: AnimalData>: UIViewController {
         view.backgroundColor = .white
         petsViewModel.fetchPets(apiManager: apiManager, completion: {})
 
-        favCollectionView = FavouritesCollectionView()
+        favCollectionView = HighlightsCollectionView()
         favCollectionView.petsViewModel = petsViewModel
 
         allPetsTableView = AllPetsTableViewController()
