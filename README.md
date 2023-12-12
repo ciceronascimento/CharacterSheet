@@ -9,7 +9,7 @@ O desafio central enfrentado neste projeto era a integração de dados provenien
 ## Principais Funcionalidades
 
 - **Integração de APIs:** As funções de requisição de API e os controladores de visualização foram desenvolvidos para serem compatíveis com múltiplas fontes de dados, permitindo a obtenção de informações de diferentes APIs de forma eficiente.
-- **Injeção e Inversão de Dependência:** Implementação desses princípios para aumentar a modularidade e facilitar a manutenção do código.
+- **Container de Injeção de Dependência:** Implementação desse princípio para aumentar a modularidade e facilitar a manutenção do código.
 - **Destaques Aleatórios:** Destaque de pets de forma aleatória para uma experiência mais dinâmica ao explorar o catálogo.
 - **Exibição de Detalhes:** Mostra fotos, temperamentos e, quando disponível, informações de origem das raças de gatos e cachorros.
 
