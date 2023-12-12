@@ -13,7 +13,7 @@ O desafio central enfrentado neste projeto era a integração de dados provenien
 - **Destaques Aleatórios:** Destaque de pets de forma aleatória para uma experiência mais dinâmica ao explorar o catálogo.
 - **Exibição de Detalhes:** Mostra fotos, temperamentos e, quando disponível, informações de origem das raças de gatos e cachorros.
 
-## Recursos Futuros (Com mais tempo estivesse disponível)
+## Recursos Futuros (Com mais tempo disponível)
 
 - **Feedback de Carregamento:** Implementação de indicadores visuais para informar o usuário sobre o carregamento de dados, melhorando a experiência do usuário.
 - **Favoritos:** Capacidade para os usuários favoritarem seus pets preferidos. (Algumas implementações ja criadas)
