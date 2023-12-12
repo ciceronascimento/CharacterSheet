@@ -16,7 +16,19 @@ struct AllPetsCell: View {
                 .resizable()
                 .frame(width: 60, height: 60)
                 .scaledToFit()
-            Text(petsViewModel.animalData[indice].name)
+            VStack(alignment: .leading) {
+                Text(petsViewModel.animalData[indice].name)
+                    .font(.headline)
+                Text("Tags: \(petsViewModel.animalData[indice].temperament ?? "Sem dados")")
+                    .font(.caption2)
+                    .italic()
+                    .minimumScaleFactor(0.1)
+                    .foregroundStyle(Color(.systemGray))
+
+                Text("Origin: \(petsViewModel.animalData[indice].origin ?? "Sem dados")")
+                    .font(.callout)
+                    .minimumScaleFactor(0.1)
+            }
             Spacer()
         }
     }

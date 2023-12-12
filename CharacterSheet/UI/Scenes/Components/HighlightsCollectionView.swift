@@ -42,7 +42,7 @@ extension HighlightsCollectionView: UICollectionViewDataSource,
 
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return petsViewModel.animalData.count
+        return petsViewModel.highlights.count
     }
 
     func collectionView(_ collectionView: UICollectionView,

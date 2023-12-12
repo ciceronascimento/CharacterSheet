@@ -52,7 +52,7 @@ class PetsViewController<T: AnimalData>: UIViewController {
                 self?.allPetsTableView.tableView.reloadData()
             }
             .store(in: &cancellables)
-        petsViewModel.$petImages
+        petsViewModel.$highlightsImg
             .receive(on: RunLoop.main)
             .sink { [weak self] _ in
                 self?.allPetsTableView.tableView.reloadData()

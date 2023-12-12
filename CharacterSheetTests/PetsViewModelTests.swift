@@ -8,13 +8,6 @@
 import XCTest
 @testable import CharacterSheet
 
-struct MockAPIModel: AnimalData {
-    var id: String
-    var name: String
-    var lifeSpan: String
-    var image: BreedImage?
-}
-
 class PetsViewModelTests: XCTestCase {
     var viewModel: PetsViewModel!
     var mockAPIManager: MockAPIManager<MockAPIModel>!
@@ -37,14 +30,18 @@ class PetsViewModelTests: XCTestCase {
         super.tearDown()
     }
 
+
+
     func testFetchPetsSuccess() {
         let mockPets = [MockAPIModel(id: "1",
                                      name: "Test Pet",
-                                     lifeSpan: "5 anos",
+                                     temperament: "brincalhão",
+                                     origin: "Lugar",
                                      image: nil),
                         MockAPIModel(id: "2",
-                                     name: "Test Pet 2",
-                                     lifeSpan: "5anos",
+                                     name: "Test Pet2",
+                                     temperament: "agitado",
+                                     origin: "Lugar",
                                      image: nil)]
         mockAPIManager.mockResult = mockPets
 
@@ -55,8 +52,67 @@ class PetsViewModelTests: XCTestCase {
 
            wait(for: [expectation], timeout: 5.0)
 
-        XCTAssertEqual(viewModel.animalData.count, mockPets.count, "The number of pets should match the mock data")
-        XCTAssertNil(viewModel.errorMessage, "There should be no error message on successful fetch")
+        XCTAssertEqual(viewModel.animalData.count, mockPets.count, "O numero de pets deverá ser o mesmo do mock")
+        XCTAssertNil(viewModel.errorMessage, "Não deverá ter erro em caso de sucesso")
     }
+
+    func testConvertImagesWithInvalidURL() {
+        let viewModel = PetsViewModel()
+        let animalData = [CatModel(id: "1", name: "Test Pet", temperament: nil, origin: nil, image: BreedImage(id: "", url: "invalid-url"))]
+
+        let expectation = XCTestExpectation(description: "ConvertImagesWithInvalidURL")
+        Task {
+            do {
+                _ = try await viewModel.convertImages(from: animalData)
+                XCTFail("Conversao deve falhar com URL Invalida")
+            } catch {
+                expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func testConvertHighlightsImagesWithInvalidURL() {
+        let viewModel = PetsViewModel()
+
+        viewModel.highlights = [CatModel(id: "1", name: "Test Pet", temperament: nil, origin: nil, image: BreedImage(id: "", url: "invalid-url"))]
+
+        let expectation = XCTestExpectation(description: "ConvertHighlightsImagesWithInvalidURL")
+        Task {
+            do {
+                _ = try await viewModel.convertHighlightsImages()
+                XCTFail("Conversão deve falhar com URL invalida")
+            } catch {
+                expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 5.0)
+    }
+
+    func testHandleAPIErrorWithHTTPError() {
+        viewModel.handleAPIError(APIError.httpError(404))
+        XCTAssertEqual(viewModel.errorMessage, "Erro HTTP: 404", "A mensagem de erro deve ser definida corretamente para erros HTTP")
+    }
+
+    func testHandleAPIErrorWithDecodingError() {
+        viewModel.handleAPIError(APIError.decodingError)
+        XCTAssertEqual(viewModel.errorMessage, "Erro ao processar os dados.", "A mensagem de erro deve ser definida corretamente para erros de decodificação")
+    }
+
+    func testHandleAPIErrorWithInvalidURLError() {
+        viewModel.handleAPIError(APIError.invalidURL)
+        XCTAssertEqual(viewModel.errorMessage, "URL inválida.", "A mensagem de erro deve ser definida corretamente para erros de URL inválida")
+    }
+
+    func testHandleAPIErrorWithUnknownError() {
+        viewModel.handleAPIError(APIError.unknownError)
+        XCTAssertEqual(viewModel.errorMessage, "Erro desconhecido.", "A mensagem de erro deve ser definida corretamente para erros desconhecidos")
+    }
+
+    func testHandleAPIErrorWithNonAPIError() {
+        viewModel.handleAPIError(NSError(domain: "", code: 0, userInfo: nil))
+        XCTAssertEqual(viewModel.errorMessage, "Erro inesperado", "A mensagem de erro deve ser definida corretamente para erros não-API")
+    }
+
 
 }

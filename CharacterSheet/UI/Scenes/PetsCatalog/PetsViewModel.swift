@@ -10,13 +10,14 @@ import SwiftUI
 class PetsViewModel: ObservableObject {
 
     @Published var animalData: [AnimalData] = []
-    @Published var favPets: [AnimalData] = []
+    @Published var highlights: [AnimalData] = []
     @Published var petImages: [UIImage]?
+    @Published var highlightsImg: [UIImage]?
     @Published var errorMessage: String?
 
-    func convertToImage() async throws -> [UIImage] {
+    func convertImages(from animals: [AnimalData]) async throws -> [UIImage] {
         var imagesArray: [UIImage] = []
-        for pet in animalData {
+        for pet in animals {
             guard let url = pet.image?.url, let imageUrl = URL(string: url) else {
                 continue
             }
@@ -28,11 +29,31 @@ class PetsViewModel: ObservableObject {
         return imagesArray
     }
 
+    func convertToImage() async throws -> [UIImage] {
+        return try await convertImages(from: animalData)
+    }
+
+    func convertHighlightsImages() async throws -> [UIImage] {
+        return try await convertImages(from: highlights)
+    }
+
+    func updateHighlights() async {
+        Task {
+            if animalData.count >= 6 {
+                highlights = animalData.shuffled().prefix(6).map { $0 }
+                highlightsImg = try await convertHighlightsImages()
+            } else {
+                highlights = animalData
+            }
+        }
+    }
+
     func fetchPets<T: APIManagerProtocol>(apiManager: T, completion: @escaping () -> Void) where T.T: AnimalData {
         Task {
             do {
                 animalData = try await apiManager.fetchRequest()
                 petImages = try await convertToImage()
+                await updateHighlights()
                 completion()
             } catch {
                 handleAPIError(error)

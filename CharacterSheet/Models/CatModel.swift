@@ -11,12 +11,12 @@ struct CatModel: AnimalData {
 
     let id: String
     let name: String
-    let lifeSpan: String
+    let temperament: String?
+    let origin: String?
     let image: BreedImage?
 
     enum CodingKeys: String, CodingKey {
-        case id, name, image
-        case lifeSpan = "life_span"
+        case id, name, image, temperament, origin
     }
 
     var imageURL: URL {

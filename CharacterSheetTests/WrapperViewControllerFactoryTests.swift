@@ -38,7 +38,7 @@ class WrapperViewControllerFactoryTests: XCTestCase {
 
         let tabViewController = WrapperViewControllerFactory.make(container: container)
 
-        XCTAssertEqual(tabViewController.viewControllers?.count, 2, "There should be exactly 2 child view controllers")
+        XCTAssertEqual(tabViewController.viewControllers?.count, 2, "Deve haver exatamente 2 view controllers filhos")
     }
 
 }

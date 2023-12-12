@@ -16,7 +16,8 @@ class APIManagerTests: XCTestCase {
         {
             "id": "affepinscher01",
             "name": "Affenpinscher",
-            "life_span": "10 - 12 years",
+            "temperament": "Stubborn, Curious, Playful, Adventurous, Active, Fun-loving",
+            "origin": "Germany, France",
             "image": {
                 "id": "img01",
                 "url": "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg"
@@ -63,8 +64,8 @@ class APIManagerTests: XCTestCase {
 
             XCTAssertEqual(firstItem?.id, "affepinscher01", "ID deve corresponder")
             XCTAssertEqual(firstItem?.name, "Affenpinscher", "Nome deve corresponder")
-            XCTAssertEqual(firstItem?.lifeSpan, "10 - 12 years", "Life span deve corresponder")
-
+            XCTAssertEqual(firstItem?.temperament!, "Stubborn, Curious, Playful, Adventurous, Active, Fun-loving", "Temperament deve corresponder")
+            XCTAssertEqual(firstItem?.origin!, "Germany, France", "Origin deve corresponder")
             XCTAssertNotNil(firstItem?.image, "Imagem não deve ser nil")
             XCTAssertEqual(firstItem?.image?.url, "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg",
                            "URL da imagem deve corresponder")
@@ -145,6 +146,43 @@ class APIManagerTests: XCTestCase {
             XCTFail("Deveria ter falhado ou tratado o redirecionamento HTTP")
         } catch {
             XCTAssertNotNil(error, "Erro esperado ou tratamento de redirecionamento HTTP")
+        }
+    }
+
+
+    func testPostFavPetHTTPError() async {
+        let animal = MockAPIModel(id: "test", name: "Test Animal", image: BreedImage(id: "img01", url: "https://example.com/image.jpg"))
+        mockSession.response = HTTPURLResponse(url: URL(string: "https://example.com")!,
+                                               statusCode: 405,
+                                               httpVersion: nil,
+                                               headerFields: nil)!
+
+        do {
+            _ = try await apiManager.postFavPet(animal: animal)
+            XCTFail("Deveria ter falhado com erro HTTP")
+        } catch let error as APIError {
+            switch error {
+            case .httpError(let statusCode):
+                XCTAssertEqual(statusCode, 405, "O status code do erro HTTP deve ser 405")
+            default:
+                XCTFail("Tipo de erro inesperado: \(error)")
+            }
+        } catch {
+            XCTFail("Erro inesperado: \(error)")
+        }
+    }
+
+    func testDeleteFavoritePetHTTPError() async {
+        let favoriteID = 123
+        mockSession.response = HTTPURLResponse(url: URL(string: "https://example.com")!,
+                                               statusCode: 404,
+                                               httpVersion: nil,
+                                               headerFields: nil)!
+
+        do {
+            _ = try await apiManager.deleteFavoritePet(favoriteID: favoriteID)
+            XCTFail("Deveria ter falhado com erro HTTP")
+        } catch {
         }
     }
 }

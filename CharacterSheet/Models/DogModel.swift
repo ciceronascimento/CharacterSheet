@@ -9,7 +9,8 @@ import Foundation
 
 protocol AnimalData: Decodable {
     var name: String { get }
-    var lifeSpan: String { get }
+    var temperament: String? { get }
+    var origin: String? { get }
     var image: BreedImage? { get }
 }
 
@@ -17,12 +18,12 @@ struct DogModel: AnimalData {
 
     let id: Int
     let name: String
-    let lifeSpan: String
+    let temperament: String?
+    let origin: String?
     let image: BreedImage?
 
     enum CodingKeys: String, CodingKey {
-        case id, name, image
-        case lifeSpan = "life_span"
+        case id, name, image, temperament, origin
     }
 
     var imageURL: URL {

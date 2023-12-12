@@ -19,7 +19,6 @@ extension URLSession: NetworkSession {
     }
 }
 
-
 class APIManager<T: AnimalData>: APIManagerProtocol {
     private let session: NetworkSession
     var configuration: APIConfiguration
@@ -27,6 +26,32 @@ class APIManager<T: AnimalData>: APIManagerProtocol {
     required init(session: NetworkSession = URLSession.shared, configuration: APIConfiguration) {
         self.session = session
         self.configuration = configuration
+    }
+
+    func fetchRequest() async throws -> [T] {
+        do {
+             let request = APIFactory.makeGetRequest(apiConfig: configuration)
+             let (data, response) = try await self.session.fetchData(for: request)
+
+             guard let httpResponse = response as? HTTPURLResponse else {
+                 throw APIError.unknownError
+             }
+             guard 200...299 ~= httpResponse.statusCode else {
+                 throw APIError.httpError(httpResponse.statusCode)
+             }
+
+             do {
+                 let breedDecoded = try JSONDecoder().decode([T].self, from: data)
+                 let breedWithImage = breedDecoded.filter { $0.image != nil && $0.image!.url != nil }
+                 return breedWithImage
+             } catch {
+                 throw APIError.decodingError
+             }
+         } catch let error as APIError {
+             throw error
+         } catch {
+             throw APIError.networkError(error)
+         }
     }
 
     func deleteFavoritePet(favoriteID: Int) async throws -> Bool {
@@ -81,32 +106,6 @@ class APIManager<T: AnimalData>: APIManagerProtocol {
             throw APIError.networkError(error)
         }
         return false
-    }
-
-    func fetchRequest() async throws -> [T] {
-        do {
-             let request = APIFactory.makeGetRequest(apiConfig: configuration)
-             let (data, response) = try await self.session.fetchData(for: request)
-
-             guard let httpResponse = response as? HTTPURLResponse else {
-                 throw APIError.unknownError
-             }
-             guard 200...299 ~= httpResponse.statusCode else {
-                 throw APIError.httpError(httpResponse.statusCode)
-             }
-
-             do {
-                 let breedDecoded = try JSONDecoder().decode([T].self, from: data)
-                 let breedWithImage = breedDecoded.filter { $0.image != nil && $0.image!.url != nil }
-                 return breedWithImage
-             } catch {
-                 throw APIError.decodingError
-             }
-         } catch let error as APIError {
-             throw error
-         } catch {
-             throw APIError.networkError(error)
-         }
     }
 }
 

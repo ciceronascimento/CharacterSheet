@@ -13,7 +13,7 @@ struct FavPetsView: View {
     var body: some View {
         HStack {
             ZStack {
-                Image(uiImage: petsViewModel.petImages![indice])
+                Image(uiImage: petsViewModel.highlightsImg![indice])
                     .resizable()
                     .frame(width: 130)
                     .scaledToFit()
@@ -23,7 +23,7 @@ struct FavPetsView: View {
                         .fill(Material.ultraThinMaterial)
                         .frame(height: 35)
                         .overlay {
-                            Text(petsViewModel.animalData[indice].name)
+                            Text(petsViewModel.highlights[indice].name)
                                 .padding(.horizontal, 10)
                                 .minimumScaleFactor(0.1)
                                 .padding(2)
