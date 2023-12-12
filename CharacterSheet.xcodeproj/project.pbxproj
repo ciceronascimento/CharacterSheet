@@ -22,6 +22,10 @@
 		DD6054B12B27899200F9F7B0 /* WrapperViewControllerFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6054B02B27899200F9F7B0 /* WrapperViewControllerFactoryTests.swift */; };
 		DD6054B32B27972E00F9F7B0 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6054B22B27972E00F9F7B0 /* DIContainer.swift */; };
 		DD6054B52B27A4DE00F9F7B0 /* PetsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6054B42B27A4DE00F9F7B0 /* PetsViewModelTests.swift */; };
+		DD6054B72B27FD7100F9F7B0 /* ProtocolsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6054B62B27FD7100F9F7B0 /* ProtocolsAPI.swift */; };
+		DD6054BB2B27FF1400F9F7B0 /* FavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6054BA2B27FF1400F9F7B0 /* FavoriteModel.swift */; };
+		DD6054BD2B27FF3400F9F7B0 /* APIFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6054BC2B27FF3400F9F7B0 /* APIFactory.swift */; };
+		DD6054BF2B27FF7000F9F7B0 /* APIEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6054BE2B27FF7000F9F7B0 /* APIEnums.swift */; };
 		DDDB1DE72B224EDE00A96193 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDB1DE62B224EDE00A96193 /* AppDelegate.swift */; };
 		DDDB1DE92B224EDE00A96193 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDB1DE82B224EDE00A96193 /* SceneDelegate.swift */; };
 		DDDB1DF12B224EDE00A96193 /* CharacterSheet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDDB1DEF2B224EDE00A96193 /* CharacterSheet.xcdatamodeld */; };
@@ -68,6 +72,10 @@
 		DD6054B02B27899200F9F7B0 /* WrapperViewControllerFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapperViewControllerFactoryTests.swift; sourceTree = "<group>"; };
 		DD6054B22B27972E00F9F7B0 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		DD6054B42B27A4DE00F9F7B0 /* PetsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsViewModelTests.swift; sourceTree = "<group>"; };
+		DD6054B62B27FD7100F9F7B0 /* ProtocolsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolsAPI.swift; sourceTree = "<group>"; };
+		DD6054BA2B27FF1400F9F7B0 /* FavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModel.swift; sourceTree = "<group>"; };
+		DD6054BC2B27FF3400F9F7B0 /* APIFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFactory.swift; sourceTree = "<group>"; };
+		DD6054BE2B27FF7000F9F7B0 /* APIEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEnums.swift; sourceTree = "<group>"; };
 		DDDB1DE32B224EDE00A96193 /* CharacterSheet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CharacterSheet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDDB1DE62B224EDE00A96193 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDDB1DE82B224EDE00A96193 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,19 +119,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DD6054922B23A61000F9F7B0 /* Domain */ = {
+		DD6054922B23A61000F9F7B0 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				DD6054932B23A69F00F9F7B0 /* APIConfiguration.swift */,
+				DD6054B62B27FD7100F9F7B0 /* ProtocolsAPI.swift */,
 			);
-			path = Domain;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		DD6054952B23B5AE00F9F7B0 /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				DD6054962B23B5B400F9F7B0 /* Scenes */,
-				DD6054A42B25175F00F9F7B0 /* TabViewController.swift */,
 				DD6054A62B25182D00F9F7B0 /* WrapperViewControllerFactory.swift */,
 			);
 			path = UI;
@@ -142,6 +149,7 @@
 		DD6054972B23B5C200F9F7B0 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
+				DD6054A42B25175F00F9F7B0 /* TabViewController.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -165,6 +173,36 @@
 				DD6054A92B273C8B00F9F7B0 /* AllPetsCell.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		DD6054B82B27FDB500F9F7B0 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				DD6054932B23A69F00F9F7B0 /* APIConfiguration.swift */,
+				DDDB1E1A2B2258B700A96193 /* APIManager.swift */,
+				DD6054BC2B27FF3400F9F7B0 /* APIFactory.swift */,
+				DD6054BE2B27FF7000F9F7B0 /* APIEnums.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		DD6054B92B27FE4A00F9F7B0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DDDB1E1C2B225D1A00A96193 /* CatModel.swift */,
+				DD6054902B23851F00F9F7B0 /* DogModel.swift */,
+				DD6054BA2B27FF1400F9F7B0 /* FavoriteModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DD6054C02B27FFBA00F9F7B0 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				DD6054AE2B27802900F9F7B0 /* MockAPIManager.swift */,
+				DDDB1E202B22677200A96193 /* MockNetworkSession.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		DDDB1DDA2B224EDE00A96193 = {
@@ -192,13 +230,12 @@
 			isa = PBXGroup;
 			children = (
 				DD6054952B23B5AE00F9F7B0 /* UI */,
-				DD6054922B23A61000F9F7B0 /* Domain */,
+				DD6054922B23A61000F9F7B0 /* Protocols */,
 				DDDB1DE62B224EDE00A96193 /* AppDelegate.swift */,
 				DD6054B22B27972E00F9F7B0 /* DIContainer.swift */,
 				DDDB1DE82B224EDE00A96193 /* SceneDelegate.swift */,
-				DDDB1E1C2B225D1A00A96193 /* CatModel.swift */,
-				DD6054902B23851F00F9F7B0 /* DogModel.swift */,
-				DDDB1E1A2B2258B700A96193 /* APIManager.swift */,
+				DD6054B92B27FE4A00F9F7B0 /* Models */,
+				DD6054B82B27FDB500F9F7B0 /* Service */,
 				DDDB1DF22B224EE000A96193 /* Assets.xcassets */,
 				DDDB1DF42B224EE000A96193 /* LaunchScreen.storyboard */,
 				DDDB1DF72B224EE000A96193 /* Info.plist */,
@@ -210,11 +247,10 @@
 		DDDB1DFF2B224EE000A96193 /* CharacterSheetTests */ = {
 			isa = PBXGroup;
 			children = (
+				DD6054C02B27FFBA00F9F7B0 /* Mocks */,
 				DDDB1E1E2B22674100A96193 /* APIManagerTests.swift */,
-				DDDB1E202B22677200A96193 /* MockNetworkSession.swift */,
 				DD6054B02B27899200F9F7B0 /* WrapperViewControllerFactoryTests.swift */,
 				DD6054B42B27A4DE00F9F7B0 /* PetsViewModelTests.swift */,
-				DD6054AE2B27802900F9F7B0 /* MockAPIManager.swift */,
 			);
 			path = CharacterSheetTests;
 			sourceTree = "<group>";
@@ -388,13 +424,17 @@
 				DDDB1DE72B224EDE00A96193 /* AppDelegate.swift in Sources */,
 				DD6054A52B25175F00F9F7B0 /* TabViewController.swift in Sources */,
 				DD6054942B23A69F00F9F7B0 /* APIConfiguration.swift in Sources */,
+				DD6054BD2B27FF3400F9F7B0 /* APIFactory.swift in Sources */,
 				DDDB1E1D2B225D1A00A96193 /* CatModel.swift in Sources */,
 				DD6054AA2B273C8B00F9F7B0 /* AllPetsCell.swift in Sources */,
 				DD60549D2B249E9600F9F7B0 /* HighlightsCollectionView.swift in Sources */,
 				DD6054A12B24DD6000F9F7B0 /* PetsStackViewController.swift in Sources */,
 				DD60548F2B237AC500F9F7B0 /* PetsViewController.swift in Sources */,
+				DD6054BF2B27FF7000F9F7B0 /* APIEnums.swift in Sources */,
 				DD60549F2B24D9A400F9F7B0 /* AllPetsTableViewController.swift in Sources */,
 				DD60549B2B248C8C00F9F7B0 /* PetsViewModel.swift in Sources */,
+				DD6054B72B27FD7100F9F7B0 /* ProtocolsAPI.swift in Sources */,
+				DD6054BB2B27FF1400F9F7B0 /* FavoriteModel.swift in Sources */,
 				DDDB1DE92B224EDE00A96193 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

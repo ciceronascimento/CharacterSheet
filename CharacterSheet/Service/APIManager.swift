@@ -7,9 +7,6 @@
 
 import Foundation
 
-protocol NetworkSession {
-    func fetchData(for request: URLRequest) async throws -> (Data, URLResponse)
-}
 
 extension URLSession: NetworkSession {
     func fetchData(for request: URLRequest) async throws -> (Data, URLResponse) {
@@ -22,23 +19,6 @@ extension URLSession: NetworkSession {
     }
 }
 
-enum APIError: Error {
-    case networkError(Error)
-    case httpError(Int)
-    case decodingError
-    case invalidURL
-    case unknownError
-}
-
-protocol APIManagerProtocol {
-    associatedtype T: AnimalData
-    var configuration: APIConfiguration { get }
-
-    init(session: NetworkSession, configuration: APIConfiguration)
-    func fetchRequest() async throws -> [T]
-    func postFavPet(animal: AnimalData) async throws -> Bool
-    func deleteFavoritePet(favoriteID: Int) async throws -> Bool
-}
 
 class APIManager<T: AnimalData>: APIManagerProtocol {
     private let session: NetworkSession
@@ -130,54 +110,3 @@ class APIManager<T: AnimalData>: APIManagerProtocol {
     }
 }
 
-extension APIConfiguration where Self: RawRepresentable, Self.RawValue == APIRoutes {
-    var apiPath: String {
-        return rawValue.rawValue
-    }
-}
-
-struct APIFactory {
-    private static func makeRequest(apiConfig: APIConfiguration, method: String) -> URLRequest {
-        let url = URL(string: apiConfig.baseURL + apiConfig.apiPath.rawValue)!
-        var request = URLRequest(url: url)
-        request.allHTTPHeaderFields = apiConfig.headers
-        request.httpMethod = method
-        return request
-    }
-
-    static func makeGetRequest(apiConfig: APIConfiguration) -> URLRequest {
-        return makeRequest(apiConfig: apiConfig, method: "GET")
-    }
-
-    static func makePostRequest(apiConfig: APIConfiguration) -> URLRequest {
-        return makeRequest(apiConfig: apiConfig, method: "POST")
-    }
-
-    static func makeDeleteRequest(apiConfig: APIConfiguration) -> URLRequest {
-        return makeRequest(apiConfig: apiConfig, method: "DELETE")
-    }
-}
-
-struct Favorite: Codable {
-    let id: Int?
-    let imageID: String
-    let subID: String
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case imageID = "image_id"
-        case subID = "sub_id"
-    }
-
-    init(id: Int? = nil, imageID: String, subID: String) {
-        self.id = id
-        self.imageID = imageID
-        self.subID = subID
-    }
-
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.imageID, forKey: .imageID)
-        try container.encode(self.subID, forKey: .subID)
-    }
-}

@@ -28,9 +28,3 @@ struct BreedImage: Decodable {
     let id: String?
     let url: String?
 }
-
-struct Result: Codable {
-    let index: String?
-    let name: String
-    let url: String
-}
